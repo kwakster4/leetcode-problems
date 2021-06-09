@@ -34,27 +34,30 @@ arr.length is even.
 // Edge: what to respond if arr.length is 0? Assume respond with true;
 
 var canReorderDoubled = function(arr) {
-  // make all elements positive, sort the array
-  let posArr = arr.map((item) => {
-    if (item < 0) {
-      return item * -1;
-    } else {
-      return item;
+  let posArr = arr.filter(element => element > 0);
+  let negArr = arr.filter(element => element < 0);
+  // if either is not of even length, return false
+  if (posArr.length % 2 !== 0 || negArr.length % 2 !== 0) {
+    return false;
+  }
+  let sortFunc = function(a,b) {
+    if (a > b) {return 1}
+    if (a < b) {return -1}
+    return 0;
+  }
+  posArr = posArr.sort(sortFunc);
+  negArr = posArr.sort(sortFunc);
+  // the array is sorted. Now use previous solution on both arrs
+  let posHalf = posArr.length / 2;
+  let negHalf = negArr.length / 2;
+  for (let i = 0; i < posHalf; i++) {
+    if (posArr[i] * 2 !== posArr[i + posHalf]) {
+      // if not, respond with false
+      return false;
     }
-  }).sort((a,b)=> {
-    if (a > b) {
-      return 1;
-    } else if (a < b) {
-      return -1;
-    } else {
-      return 0;
-    }
-  });
-  // Currently fails if there is a 0. also fails if one negative, and one positive, but are pairs if ignoring signs
-  // iterate through the array, find if array's counterpart in the other side, i.e. 0 to the half + 1 of the array, and the half of the array to the end of the array, are doubles
-  let half = posArr.length / 2;
-  for (let i = 0; i < half; i++) {
-    if (posArr[i] * 2 !== posArr[i + half]) {
+  }
+  for (let j = 0; j < negHalf; j++) {
+    if (negArr[j] / 2 !== negArr[j + negHalf]) {
       // if not, respond with false
       return false;
     }
@@ -62,3 +65,32 @@ var canReorderDoubled = function(arr) {
   // end with true.
   return true;
 };
+
+
+// Previous plan, Time complexity O(n), fails if 0's included, as well as pairs with opposing signs
+// // make all elements positive, sort the array
+// let posArr = arr.map((item) => {
+//   if (item < 0) {
+//     return item * -1;
+//   } else {
+//     return item;
+//   }
+// }).sort((a,b)=> {
+//   if (a > b) {
+//     return 1;
+//   } else if (a < b) {
+//     return -1;
+//   } else {
+//     return 0;
+//   }
+// });
+// // iterate through the array, find if array's counterpart in the other side, i.e. 0 to the half + 1 of the array, and the half of the array to the end of the array, are doubles
+// let half = posArr.length / 2;
+// for (let i = 0; i < half; i++) {
+//   if (posArr[i] * 2 !== posArr[i + half]) {
+//     // if not, respond with false
+//     return false;
+//   }
+// }
+// // end with true.
+// return true;
