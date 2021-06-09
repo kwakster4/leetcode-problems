@@ -55,16 +55,33 @@ var canReorderDoubled = function(arr) {
   // the array is sorted. Now use previous solution on both arrs
   // previous solution flawed, fails with [1,2,4,8]
   // change to indexOf, but higher time complexity
-  for (let i = 0; i < posArr.length / 2; i++) {
-    if (posArr.indexOf(posArr[i] * 2) === -1) {
+  // current solution counts things twice, fails with [1,2,4,16,8,4]
+  while(posArr.length > 0) {
+    let targetIndex = posArr.indexOf(posArr[0] * 2);
+    if (targetIndex === -1) {
       return false;
     }
+    posArr.splice(targetIndex, 1);
+    posArr.shift();
   }
-  for (let j = 0; j < negArr.length / 2; j++) {
-    if (negArr.indexOf(negArr[j] / 2) === -1) {
+  while(negArr.length > 0) {
+    let targetIndex = negArr.indexOf(negArr[0] / 2);
+    if (targetIndex === -1) {
       return false;
     }
+    negArr.splice(targetIndex, 1);
+    negArr.shift();
   }
+  // for (let i = 0; i < posArr.length / 2; i++) {
+  //   if (posArr.indexOf(posArr[i] * 2) === -1) {
+  //     return false;
+  //   }
+  // }
+  // for (let j = 0; j < negArr.length / 2; j++) {
+  //   if (negArr.indexOf(negArr[j] / 2) === -1) {
+  //     return false;
+  //   }
+  // }
   // end with true.
   return true;
 };
