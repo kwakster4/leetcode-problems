@@ -61,7 +61,7 @@ var canReorderDoubled = function(arr) {
     }
   }
   for (let j = 0; j < negArr.length / 2; j++) {
-    if (negArr.indexOf(negArr[i] * 2) === -1) {
+    if (negArr.indexOf(negArr[j] / 2) === -1) {
       return false;
     }
   }
