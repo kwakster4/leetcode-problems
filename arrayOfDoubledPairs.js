@@ -53,17 +53,15 @@ var canReorderDoubled = function(arr) {
   posArr = posArr.sort(sortFunc);
   negArr = negArr.sort(sortFunc);
   // the array is sorted. Now use previous solution on both arrs
-  let posHalf = posArr.length / 2;
-  let negHalf = negArr.length / 2;
-  for (let i = 0; i < posHalf; i++) {
-    if (posArr[i] * 2 !== posArr[i + posHalf]) {
-      // if not, respond with false
+  // previous solution flawed, fails with [1,2,4,8]
+  // change to indexOf, but higher time complexity
+  for (let i = 0; i < posArr.length / 2; i++) {
+    if (posArr.indexOf(posArr[i] * 2) === -1) {
       return false;
     }
   }
-  for (let j = 0; j < negHalf; j++) {
-    if (negArr[j] / 2 !== negArr[j + negHalf]) {
-      // if not, respond with false
+  for (let j = 0; j < negArr.length / 2; j++) {
+    if (negArr.indexOf(negArr[i] * 2) === -1) {
       return false;
     }
   }
