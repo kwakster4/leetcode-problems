@@ -36,8 +36,12 @@ arr.length is even.
 var canReorderDoubled = function(arr) {
   let posArr = arr.filter(element => element > 0);
   let negArr = arr.filter(element => element < 0);
+  let zArr = arr.filter(element => element === 0);
   // if either is not of even length, return false
   if (posArr.length % 2 !== 0 || negArr.length % 2 !== 0) {
+    return false;
+  }
+  if (zArr.length % 2 !== 0) {
     return false;
   }
   let sortFunc = function(a,b) {
@@ -46,7 +50,7 @@ var canReorderDoubled = function(arr) {
     return 0;
   }
   posArr = posArr.sort(sortFunc);
-  negArr = posArr.sort(sortFunc);
+  negArr = negArr.sort(sortFunc);
   // the array is sorted. Now use previous solution on both arrs
   let posHalf = posArr.length / 2;
   let negHalf = negArr.length / 2;
