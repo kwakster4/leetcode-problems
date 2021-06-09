@@ -36,6 +36,7 @@ arr.length is even.
 var canReorderDoubled = function(arr) {
   let posArr = arr.filter(element => element > 0);
   let negArr = arr.filter(element => element < 0);
+  // zArr and its check may not be necessary due to constraint of always having even length arrays
   let zArr = arr.filter(element => element === 0);
   // if either is not of even length, return false
   if (posArr.length % 2 !== 0 || negArr.length % 2 !== 0) {
