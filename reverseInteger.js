@@ -16,8 +16,8 @@ var reverse = function(x) {
   for (let i = numStr.length - 1; i >= 0; i--) {
     result += numStr[i];
   }
-  if (parseInt(result) > (2 ** 31 - 1) || parseInt(result) < (-2 ** 31)) {
-    return 0;
-  }
-  return parseInt(result);
+  // if (parseInt(result) > (2 ** 31 - 1) || parseInt(result) < (-2 ** 31)) {
+  //   return 0;
+  // }
+  return parseInt(result) || 0;
 };
