@@ -19,7 +19,7 @@
   let sum = 0;
   let leftTraverse = function(node) {
     if (node.left) {
-      sum += node.left;
+      sum += node.left.val;
     }
     if (node.left) {leftTraverse(node.left);}
     if (node.right) {leftTraverse(node.right);}
