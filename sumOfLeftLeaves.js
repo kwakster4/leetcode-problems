@@ -16,9 +16,12 @@
  var sumOfLeftLeaves = function(root) {
   // initialize sum variable
   // make recursion function that goes through all the children of the node, and adds the left leaf to the param
+  // made mistake, assumed left branches were the same as leaves
+  // leaves => no left.val, nor left.right
   let sum = 0;
   let leftTraverse = function(node) {
     if (node.left) {
+      if (node.left.left === null && node.left.right === null)
       sum += node.left.val;
     }
     if (node.left) {leftTraverse(node.left);}
