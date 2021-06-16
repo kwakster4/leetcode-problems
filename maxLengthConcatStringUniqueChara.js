@@ -27,10 +27,21 @@ Edge: What if only one item in array, but has nonunique letters? Assume return 0
 
 var maxLength = function(arr) {
   // try all combinations of arr, from its own element, to combinations of other elements. if the combination is unique, check its length and compare to the maxLength. Once all combinations have been checked, return maxLength;
-  let maxLength = 0;
-  // do something;
-  return maxLength;
+  var maxBacktrack = function(array, currentStr, idx) {
+    if (idx === array.length) {
+      return currentStr.length;
+    }
+    let max = 0;
+    let concat = currentStr + array[idx];
+    if (isUnique(concat)) {
+      max = Math.max(max, maxBacktrack(array, concat, idx + 1));
+    }
+    max = Math.max(max, maxBacktrack(array, currentStr, idx + 1));
+    return max;
+  }
+  return maxBacktrack(arr, "", 0);
 };
+
 
 var isUnique = function(string) {
   // helper function, determines if string has unique characters
