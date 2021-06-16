@@ -33,9 +33,11 @@ var maxLength = function(arr) {
     }
     let max = 0;
     let concat = currentStr + array[idx];
+    // if concat is unique, continue along branch to continue concating with other items from array
     if (isUnique(concat)) {
       max = Math.max(max, maxBacktrack(array, concat, idx + 1));
     }
+    //continue with current string to concat with other items from array. at this point, max is either before, or from the isUnique. Regardless, backtracked by not concatting with item.
     max = Math.max(max, maxBacktrack(array, currentStr, idx + 1));
     return max;
   }
