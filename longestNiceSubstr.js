@@ -10,7 +10,7 @@ var longestNiceSubstring = function(s) {
   // Find all possible substrings, if isNice, check to see if its length is longer than current maxNiceSubstr.
   let maxNiceSubstr = "";
   for (let i = 0; i < s.length; i++) {
-    for (let j = i + 1; j < s.length; j++) {
+    for (let j = i + 1; j <= s.length; j++) {
       let substr = s.slice(i, j);
       if (isNice(substr) && substr.length > maxNiceSubstr.length) {
         maxNiceSubstr = substr;
